@@ -147,9 +147,19 @@
                                     class="bg-t-smoke text-white h-[100%] text-2xl flex-grow overflow-hidden rounded-r-md outline-none pl-2 " autocomplete="off"
                                     @input="filterInput($event)" />
                             </div>
+                            <button 
+                                class="button w-full text-xl xl:text-3xl sm:px-7 sm:py-5 generic-hover disabled:opacity-75 disabled:cursor-not-allowed mt-10 rounded-lg border-2 bg-blue"
+                                :disabled="isFlipping" @click="flipCoins" >
+                                <button v-if="flipButtonText === 'FLIP HEADS'" @click="startGame(1, betAmount)">FLIP
+                                    HEADS</button>
+                                <button v-if="flipButtonText === 'FLIP TAILS'" @click="startGame(2, betAmount)">FLIP
+                                    TAILS</button>
+                            </button> 
                         </div>
                     </div>
                 </div>
+                
+
                 <div class="p-12 flex-1">  
                     <h1 class="text-xl mt-10 mb-4 font-ocr text-center">Recent Plays</h1>
                     <div class="recent-plays rounded-md w-full flex flex-col gap-3 mb-10 font-ocr"  style="position: relative;">
@@ -533,7 +543,7 @@ export default {
         }
         };
         await flipCoins( fetchedCoinGameStateId)
-        await flipCoins( fetchedCoinGameStateId.gameResult );
+        await flipCoins( fetchedCoinGameStateId.gameResult);
         isModalOpen.value =  true ; 
         await getRewardEntry() 
         await gameProgramCount() 
